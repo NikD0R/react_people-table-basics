@@ -3,13 +3,13 @@ import { Person } from '../../types';
 import classNames from 'classnames';
 
 type Props = {
-  people: Person[] | null;
+  people: Person[];
   person: Person;
 };
 
 export const PeopleLink: React.FC<Props> = ({ person, people }) => {
-  const mother = people?.find(p => p.name === person.motherName);
-  const father = people?.find(p => p.name === person.fatherName);
+  const mother = people.find(p => p.name === person.motherName);
+  const father = people.find(p => p.name === person.fatherName);
   const { slug } = useParams();
 
   return (
@@ -37,7 +37,9 @@ export const PeopleLink: React.FC<Props> = ({ person, people }) => {
         {!person.motherName ? (
           '-'
         ) : mother ? (
-          <Link to={`/people/${mother.slug}`}>{person.motherName}</Link>
+          <Link to={`/people/${mother.slug}`} className="has-text-danger">
+            {person.motherName}
+          </Link>
         ) : (
           person.motherName
         )}
